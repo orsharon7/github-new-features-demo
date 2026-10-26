@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  copilot-requests: write
 engine: copilot
 timeout-minutes: 10
 tools:

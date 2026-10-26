@@ -1,0 +1,7 @@
+{
+  "release": "2026.10-demo",
+  "tests": { "passed": 120, "total": 120 },
+  "criticalAlerts": 0,
+  "rollbackVerified": true,
+  "notes": "Synthetic demo data. All release gates pass and rollback has been rehearsed."
+}
