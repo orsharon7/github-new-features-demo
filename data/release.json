@@ -1,0 +1,8 @@
+{
+  "release": "2026.10-demo",
+  "tests": { "passed": 118, "total": 120 },
+  "criticalAlerts": 1,
+  "rollbackVerified": false,
+  "owner": "demo-release-team",
+  "notes": "SYNTHETIC DATA. Two tests fail, one critical alert remains, and rollback is not yet verified."
+}

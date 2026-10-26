@@ -1,0 +1,15 @@
+{
+  "name": "release-radar-cloud-demo",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test test/app.test.mjs",
+    "test:regression": "node --test checks/escaping.test.mjs"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
