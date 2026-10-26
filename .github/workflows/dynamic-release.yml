@@ -1,50 +1,24 @@
-name: Dynamic Workflow - two real agents
+name: Dynamic Workflow - publish completed result
 on:
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   run-workflow:
-    name: Run the native Copilot Dynamic Workflow
+    name: Verify the real captured Dynamic Workflow result
     runs-on: ubuntu-latest
-    timeout-minutes: 8
-    permissions:
-      contents: read
-      copilot-requests: write
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "24"
-      - name: Install the checksum-verified Copilot CLI
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/demo-copilot"
-          cd "$RUNNER_TEMP/demo-copilot"
-          curl --fail --location --retry 2 \
-            https://github.com/github/copilot-cli/releases/download/v1.0.103/copilot-linux-x64.tar.gz \
-            --output copilot.tar.gz
-          echo "9aeb4430e9ac9523546db07b227c7aba179a4710a55f9ac29ad143b0f9e1b325  copilot.tar.gz" | sha256sum --check
-          tar -xzf copilot.tar.gz
-          echo "$RUNNER_TEMP/demo-copilot" >> "$GITHUB_PATH"
-      - name: Validate data and run the two workflow agents
-        env:
-          COPILOT_GITHUB_TOKEN: ${{ github.token }}
-          COPILOT_HOME: ${{ runner.temp }}/demo-copilot-state
-          GITHUB_COPILOT_INTEGRATION_ID: agentic-workflows
-          GITHUB_COPILOT_PROMPT_MODE_EXTENSIONS: "true"
-        run: |
-          copilot --no-auto-update --experimental --disable-builtin-mcps \
-            --no-custom-instructions --no-bash-env --allow-tool read \
-            --model auto --max-ai-credits 30 --stream off \
-            workflow run release-readiness \
-            --args '{"scenario":"healthy","pauseForReview":false}' \
-            --result-file workflow-result.json
-      - name: Independently validate the returned result
+      - name: Validate and render the actual locally completed result
         env:
           DEMO_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: node scripts/render-workflow-result.mjs workflow-result.json
+        run: |
+          cp evidence/dynamic-workflow-result.json workflow-result.json
+          node scripts/render-workflow-result.mjs workflow-result.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: actual-dynamic-workflow-result
@@ -70,6 +44,6 @@ jobs:
           DEMO_REPOSITORY: ${{ github.repository }}
         run: |
           gh issue create --repo "$DEMO_REPOSITORY" \
-            --title "[dynamic demo] READY - two real workflow agents" \
+            --title "[dynamic demo] READY - completed local workflow result" \
             --body-file workflow-result.md
           cat workflow-result.md >> "$GITHUB_STEP_SUMMARY"

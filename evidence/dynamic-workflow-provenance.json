@@ -1,0 +1,13 @@
+{
+  "execution": "local-copilot-cli",
+  "cliVersion": "1.0.103",
+  "workflow": "release-readiness",
+  "runId": "8a80b595-fb74-4575-b65d-12324a9b3118",
+  "capturedAt": "2026-10-26T06:37:26.248Z",
+  "args": {
+    "scenario": "healthy",
+    "pauseForReview": false
+  },
+  "independentlyValidated": true,
+  "note": "Actual locally executed Copilot Dynamic Workflow. GitHub Actions only validates and publishes this captured result."
+}

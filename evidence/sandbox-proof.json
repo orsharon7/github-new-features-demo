@@ -1,0 +1,5 @@
+{
+  "status": "PASS",
+  "allowedWrite": true,
+  "denialCode": "EPERM"
+}

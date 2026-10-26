@@ -1,0 +1,19 @@
+{
+  "runId": "8a80b595-fb74-4575-b65d-12324a9b3118",
+  "release": "2026.10-demo",
+  "decision": "READY",
+  "blockers": [],
+  "reviews": [
+    {
+      "label": "quality",
+      "summary": "Release 2026.10-demo is READY.",
+      "evidence": "All 120 of 120 tests passed, there are 0 critical alerts, and rollback was verified. The deterministic gate reports no blockers."
+    },
+    {
+      "label": "operations",
+      "summary": "Release 2026.10-demo is READY.",
+      "evidence": "The deterministic gate reports READY with no blockers. Tests passed 120/120, there are 0 critical alerts, and rollback is verified as rehearsed."
+    }
+  ],
+  "scenario": "healthy"
+}

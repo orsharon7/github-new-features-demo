@@ -23,16 +23,19 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   }
   const body = [
     "# Dynamic Workflow: READY",
-    "**SYNTHETIC DEMO DATA. This is the actual output of a registered Copilot Dynamic Workflow.**",
+    "**SYNTHETIC DEMO DATA. This is the actual output of a registered Copilot Dynamic Workflow run locally.**",
+    "**Execution location:** the two AI agents ran in the presenter's authenticated Copilot CLI. This GitHub Actions run validates and publishes the captured output; it does not rerun the AI workflow.",
     `- Native workflow run ID: \`${report.runId}\``,
     "- Status: completed and independently validated",
     "- Decision: **READY**",
     "- Blockers: **none**",
     "- Real workflow-owned agents: **2**",
-    `- [Completed GitHub Actions run](${runUrl.href})`,
+    `- [Result validation and publication run](${runUrl.href})`,
     ...report.reviews.flatMap((review) => [`## ${review.label}`, review.summary, `Evidence: ${review.evidence}`]),
     "## What to say",
-    "The process is defined in code: validate data, apply deterministic gates, run two agents in parallel, and combine their explanations. GitHub Actions hosts the run; the actual orchestration is Copilot Dynamic Workflows.",
+    "The process is defined in code: validate data, apply deterministic gates, run two agents in parallel, and combine their explanations. This real process ran in Copilot locally; its completed output is shown here on GitHub.",
+    "## Availability note",
+    "The native Dynamic Workflow was unavailable with this repository's scoped Actions inference session. Rather than simulate it, we ran it in the entitled local Copilot session and published the real result. Agentic Workflows ran directly in Actions in the separate release-report demo.",
     "## Actual returned JSON",
     "```json", JSON.stringify(report, null, 2), "```"
   ].join("\n\n") + "\n";
