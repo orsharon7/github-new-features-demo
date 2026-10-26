@@ -80,5 +80,5 @@ export async function runReleaseReadiness(ctx) {
     await ctx.pause("presenter-review-v1");
   }
   ctx.phase("Report");
-  return { ...gates, reviews, scenario: args.scenario };
+  return { runId: ctx.runId, ...gates, reviews, scenario: args.scenario };
 }
